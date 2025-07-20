@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Home — Mpox App{% endblock %}
+
+{% block content %}
+  <section>
+    <h2>Welcome!</h2>
+    <p>Mpox Detection Application provides an easy way to check symptoms, access prevention tips, and view live stats.</p>
+  </section>
+
+  <section>
+    <h2>What You’ll Find Here:</h2>
+    <ul>
+      <li>Symptom Checker and Detection Tools</li>
+      <li>Preventive Measures and Safety Tips</li>
+      <li>AI Chatbot Assistant for Queries</li>
+      <li>Nearby Healthcare Facilities and Emergency Contacts</li>
+      <li>Live Statistics and Data Visualization</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Meet Our Team</h2>
+    <div class="team-grid">
+      {% for member in team_members %}
+        <div class="team-card">
+          <img
+            src="{{ url_for('static', filename='images/' ~ member.image) }}"
+            alt="{{ member.name }}">
+          <h3>{{ member.name }}</h3>
+          <p class="role">{{ member.role }}</p>
+          <p class="bio">{{ member.bio }}</p>
+          <p class="contact">
+            📞 {{ member.phone }}<br>
+            ✉️ <a href="mailto:{{ member.email }}">{{ member.email }}</a>
+          </p>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+{% endblock %}

@@ -1,0 +1,4 @@
+Ligand,SMILES
+Ligand1,CC(=O)Oc1ccccc1C(=O)O
+Ligand2,CC(=O)Oc1ccccc1C(=O)O.OCCN(CCO)c1nc(N2CCCCC2)c2nc(N(CCO)CCO)nc(N3CCCCC3)c2n1
+Ligand3,CC(=O)Nc1ccc(O)cc1.CC(=O)Oc1ccccc1C(=O)O.Cn1c(=O)c2c(ncn2C)n(C)c1=O

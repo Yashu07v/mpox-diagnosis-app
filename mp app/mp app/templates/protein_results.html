@@ -1,0 +1,8 @@
+<!-- templates/protein_results.html -->
+{% extends 'base.html' %}
+{% block title %}Protein Results{% endblock %}
+{% block content %}
+<h2>Protein Upload Successful</h2>
+<p>Your protein file has been processed.</p>
+<img src="{{ url_for('static', filename='output/tree.png') }}" alt="Phylogenetic Tree" />
+{% endblock %}

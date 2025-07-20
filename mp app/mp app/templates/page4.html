@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Chatbot Assistant — Mpox App{% endblock %}
+
+{% block content %}
+  <section>
+    <div class="chat-box" id="chat-box">
+      <p>Hi there! 👋 How can I assist you today?</p>
+    </div>
+
+    <div class="input-group">
+      <input type="text" id="user-input" placeholder="Type your message...">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </section>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    function sendMessage() {
+      const input = document.getElementById('user-input');
+      const chatBox = document.getElementById('chat-box');
+      const text = input.value.trim();
+      if (!text) return;
+
+      // Append user message
+      const userMsg = document.createElement('p');
+      userMsg.textContent = 'You: ' + text;
+      chatBox.appendChild(userMsg);
+
+      // Append bot response
+      const botMsg = document.createElement('p');
+      botMsg.textContent = 'Bot: I am still learning! 😊 Please check our Prevention Guide or Detection Page for more info.';
+      chatBox.appendChild(botMsg);
+
+      input.value = '';
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+  </script>
+{% endblock %}

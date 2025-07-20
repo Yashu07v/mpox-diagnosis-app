@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Statistics Dashboard — Mpox App{% endblock %}
+
+{% block content %}
+  
+    <div class="stats">
+      <h2>Global Statistics</h2>
+      <p>Confirmed Cases: 118,777</p>
+      <p>Recovered: 10,987</p>
+      <p>Active Cases: 1,234</p>
+      <p>Deaths: 263</p>
+    </div>
+
+    <div class="who-link">
+      <p>
+        For real-time mpox case updates, visit the
+        <a href="https://www.who.int/news-room/fact-sheets/detail/mpox"
+           target="_blank">WHO Monkeypox Global Trends</a>
+      </p>
+      <small>Reference: World Health Organization. (2024). Monkeypox outbreak: global trends.</small>
+    </div>
+  </section>
+{% endblock %}

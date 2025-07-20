@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{% block title %}Mpox App{% endblock %}</title>
+
+  <!-- Inline your old CSS here -->
+  <style>
+    body { margin: 0; font-family: Arial,sans-serif; background-color:#f4f7fc; color:#333; line-height:1.6; }
+    .container { max-width:900px; margin:40px auto; padding:20px; background:#fff; box-shadow:0 4px 8px rgba(0,0,0,0.1); border-radius:10px; }
+    header { text-align:center; margin-bottom:20px; padding:40px 20px; position:relative; }
+    header .logo-left, header .logo-right { position:absolute; top:10px; height:60px; }
+    header .logo-left { left:10px; }
+    header .logo-right { right:10px; }
+    header h1 { margin:0; color:#2c3e50; font-size:2.5em; padding:0 80px; }
+    header p { color:#7f8c8d; font-size:1.1em; margin-top:10px; }
+    nav { text-align:center; margin-bottom:30px; background-color:#2980b9; padding:10px; border-radius:5px; }
+    nav a { margin:0 15px; text-decoration:none; color:#fff; font-weight:bold; }
+    nav a:hover { text-decoration:underline; }
+    /* Team-card grid */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  margin-top: 16px;
+}
+
+.team-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 16px;
+  text-align: center;
+  transition: transform .2s;
+}
+.team-card:hover {
+  transform: translateY(-4px);
+}
+
+.team-card img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 12px;
+}
+
+.team-card h3 {
+  margin: 8px 0 4px;
+  font-size: 1.2em;
+  color: #2c3e50;
+}
+
+.team-card .role {
+  font-style: italic;
+  color: #7f8c8d;
+  margin-bottom: 8px;
+}
+
+.team-card .bio {
+  font-size: 0.95em;
+  margin-bottom: 12px;
+}
+
+.team-card .contact a {
+  color: #2980b9;
+  text-decoration: none;
+}
+.team-card .contact a:hover {
+  text-decoration: underline;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Left Logo" class="logo-left">
+      <img src="{{ url_for('static', filename='images/REVA.png') }}" alt="Right Logo" class="logo-right">
+      <h1>{% block header %}Mpox Detection Application{% endblock %}</h1>
+      <p>Your comprehensive tool for Mpox awareness and management by <span class="highlight">Team PSY</span></p>
+    </header>
+
+    <nav>
+      <a href="{{ url_for('index') }}">Home</a>
+      <a href="{{ url_for('page2') }}">Detection Input</a>
+      <a href="{{ url_for('page3') }}">Prevention Guide</a>
+      <a href="{{ url_for('page4') }}">Chatbot</a>
+      <a href="{{ url_for('page5') }}">Resources</a>
+      <a href="{{ url_for('page6') }}">Statistics</a>
+      <a href="{{ url_for('page7') }}">Screening</a>
+    </nav>
+    <hr>
+
+    <main>
+      {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+      &copy; 2025 Mpox Detection Application. All rights reserved.
+    </footer>
+  </div>
+
+  {% block scripts %}{% endblock %}
+</body>
+</html>

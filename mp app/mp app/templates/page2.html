@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}Detection Input — Mpox App{% endblock %}
+
+{% block content %}
+  <section>
+    <h2>Upload Image for Detection</h2>
+    <input type="file" id="imageUpload" accept="image/*" />
+    <button onclick="predict()">Predict</button>
+    <button onclick="downloadPDF()">Download Result as PDF</button>
+    <div id="result"></div>
+  </section>
+{% endblock %}
+
+{% block scripts %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script>
+    let predictionData = {};
+    function predict() {
+      const img = document.getElementById('imageUpload').files[0];
+      if (!img) { alert('Please upload an image.'); return; }
+      const form = new FormData(); form.append('file', img);
+
+      fetch('{{ url_for("predict") }}', { method: 'POST', body: form })
+        .then(r => r.json())
+        .then(data => {
+          if (data.error) return alert(data.error);
+          predictionData = data;
+          document.getElementById('result').innerHTML = `
+            <h3>Prediction Result:</h3>
+            <p><strong>Class:</strong> ${data.predictedClass}</p>
+            <p><strong>Date & Time:</strong> ${data.date}</p>
+            <h4>Probabilities:</h4>
+            <ul>
+              ${Object.entries(data.probabilities)
+                .map(([k,v]) => `<li>${k}: ${v}%</li>`).join('')}
+            </ul>
+            <h4>Symptoms:</h4>
+            <p>${data.symptoms}</p>
+          `;
+        })
+        .catch(e => alert('Prediction failed.'));
+    }
+
+    function downloadPDF() {
+      if (!predictionData.predictedClass) {
+        alert('Run a prediction first!'); return;
+      }
+      const { jsPDF } = window.jspdf, doc = new jsPDF();
+      doc.setFontSize(18).text('Mpox Detection Report', 20, 20);
+      doc.setFontSize(12).text(`Date: ${predictionData.date}`, 20, 30);
+      doc.text(`Class: ${predictionData.predictedClass}`, 20, 40);
+      let y = 50;
+      for (const [k,v] of Object.entries(predictionData.probabilities)) {
+        doc.text(`${k}: ${v}%`, 20, y); y += 10;
+      }
+      doc.text('Symptoms:', 20, y + 10);
+      doc.text(predictionData.symptoms, 20, y + 20);
+      doc.save('Mpox_Report.pdf');
+    }
+  </script>
+{% endblock %}
