@@ -1,6 +1,0 @@
-Flask
-pandas
-rdkit-pypi
-ete3
-biopython
-gunicorn
